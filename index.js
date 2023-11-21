@@ -2,24 +2,25 @@ const OpenAI = require('openai')
 const express = require('express')
 const app = express()
 const port = 8080
+
+require('dotenv').config()
+
 const openai = new OpenAI({
-  apiKey: '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',
+  apiKey: process.env.API_KEY,
 });
 
 app.get('/', async (req, res) => {
   try {
+    let promt = req.query.promt;
     const chatCompletion = await openai.chat.completions.create({
-      messages: [{ role: 'user', content: 'Придумай гороскоп на день. Одним предложением.' }],
+      messages: [{ role: 'user', content: promt }],
       model: 'gpt-3.5-turbo',
     });
     var message = chatCompletion.choices[0].message.content
-    console.log(message);
-    res.send(message)
+    res.json({ message: message });
   } catch (error) {
-    res.send(error)
+    res.json({ error: error });
   }
-
-  
 })
 
 app.listen(port, () => {
