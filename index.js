@@ -11,17 +11,17 @@ const openai = new OpenAI({
   apiKey: process.env.API_KEY,
 });
 
-https
-  .createServer(
-    {
-      key: fs.readFileSync('./key.pem'),
-      cert: fs.readFileSync('./gpterica_space.pem')
-    },
-    app
-  )
-  .listen(port, () => {
-    console.log(`serever is runing at port ${port}`);
-  })
+// https
+//   .createServer(
+//     {
+//       key: fs.readFileSync('./key.pem'),
+//       cert: fs.readFileSync('./gpterica_space.pem')
+//     },
+//     app
+//   )
+//   .listen(port, () => {
+//     console.log(`serever is runing at port ${port}`);
+//   })
 
 
 app.get('/ask', async (req, res) => {
