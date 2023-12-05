@@ -15,7 +15,7 @@ https
   .createServer(
     {
       key: fs.readFileSync('./key.pem'),
-      cert: fs.readFileSync('./cert.pem')
+      cert: fs.readFileSync('./gpterica_space.pem')
     },
     app
   )
