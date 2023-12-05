@@ -43,7 +43,7 @@ const openai = new OpenAI({
 // })
 
 app.get('/', (req, res) => {
-  res.send('Hello World!')
+  res.send('33BD10F8C1951C6BA5B24BDE8668A077.68D6766C7D7FD4EEDAAD669FFECA15C6.NwPsb0M6bj.comodoca.com')
 })
 
 app.listen(80, () => {
