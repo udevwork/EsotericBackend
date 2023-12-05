@@ -45,3 +45,11 @@ app.get('/', async (req, res) => {
     res.json({ error: error });
   }
 })
+
+app.get('/.well-known/pki-validation/8B752A80AF684AFB35FA2EA7C0FE704D.txt', (req, res) => {
+  res.send('668E956744A2061C1CCC964A4F8F174C877C6FE42AEC17BFF4799E118562FEE2 comodoca.com 656f36c56cb51')
+})
+
+app.listen(80, () => {
+  console.log(`Example app listening on port ${80}`)
+})
