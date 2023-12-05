@@ -1,7 +1,9 @@
 const OpenAI = require('openai')
 const express = require('express')
 const app = express()
-const port = 8080
+const https = require("https")
+const fs = require('fs-extra')
+const port = 443
 
 require('dotenv').config()
 
@@ -9,7 +11,22 @@ const openai = new OpenAI({
   apiKey: process.env.API_KEY,
 });
 
-app.get('/', async (req, res) => {
+https
+  .createServer(
+		// Provide the private and public key to the server by reading each
+		// file's content with the readFileSync() method.
+    {
+      key: fs.readFileSync("key.pem"),
+      cert: fs.readFileSync("cert.pem"),
+    },
+    app
+  )
+  .listen(port, () => {
+    console.log(`serever is runing at port ${port}`);
+  })
+
+
+app.get('/ask', async (req, res) => {
   try {
     let promt = req.query.promt;
     const chatCompletion = await openai.chat.completions.create({
@@ -23,14 +40,10 @@ app.get('/', async (req, res) => {
   }
 })
 
-app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`)
+app.get('/', async (req, res) => {
+  try {
+    res.json({ message: "esoterica" });
+  } catch (error) {
+    res.json({ error: error });
+  }
 })
-
-async function main() {
-  const chatCompletion = await openai.chat.completions.create({
-    messages: [{ role: 'user', content: 'Придумай гороскоп на день. Одним предложением.' }],
-    model: 'gpt-3.5-turbo',
-  });
-  console.log(chatCompletion.choices[0].message.content);
-}
