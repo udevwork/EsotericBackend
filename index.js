@@ -67,7 +67,7 @@ app.get('/v2/ask', async (req, res) => {
 
 app.get('/', async (req, res) => {
   try {
-    res.json({ message: "esoterica" });
+    res.json({ message: "esoterica v0.1" });
   } catch (error) {
     res.json({ error: error });
   }
